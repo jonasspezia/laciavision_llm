@@ -178,14 +178,14 @@ def main():
 
     # --- Page Config ---
     st.set_page_config(
-        page_title="The OmniChat",
+        page_title="LACia Vision LLM",
         page_icon="🤖",
         layout="centered",
         initial_sidebar_state="expanded",
     )
 
     # --- Header ---
-    st.html("""<h1 style="text-align: center; color: #6ca395;">🤖 <i>The OmniChat</i> 💬</h1>""")
+    st.html("""<h1 style="text-align: center; color: #6ca395;">🤖 <i>LACia Vision LLM</i> 💬</h1>""")
 
     # --- Side Bar ---
     with st.sidebar:
@@ -193,32 +193,30 @@ def main():
         with cols_keys[0]:
             default_openai_api_key = os.getenv("OPENAI_API_KEY") if os.getenv("OPENAI_API_KEY") is not None else ""  # only for development environment, otherwise it should return None
             with st.popover("🔐 OpenAI"):
-                openai_api_key = st.text_input("Introduce your OpenAI API Key (https://platform.openai.com/)", value=default_openai_api_key, type="password")
+                openai_api_key = st.text_input("Introduza sua API Key (https://platform.openai.com/)", value=default_openai_api_key, type="password")
         
         with cols_keys[1]:
             default_google_api_key = os.getenv("GOOGLE_API_KEY") if os.getenv("GOOGLE_API_KEY") is not None else ""  # only for development environment, otherwise it should return None
-            with st.popover("🔐 Google"):
-                google_api_key = st.text_input("Introduce your Google API Key (https://aistudio.google.com/app/apikey)", value=default_google_api_key, type="password")
+            with st.popover("🔐 LACia Vision LLM"):
+                google_api_key = st.text_input("Introduza sua API Key (https://aistudio.google.com/app/apikey)", value=default_google_api_key, type="password")
 
         default_anthropic_api_key = os.getenv("ANTHROPIC_API_KEY") if os.getenv("ANTHROPIC_API_KEY") is not None else ""
         with st.popover("🔐 Anthropic"):
-            anthropic_api_key = st.text_input("Introduce your Anthropic API Key (https://console.anthropic.com/)", value=default_anthropic_api_key, type="password")
+            anthropic_api_key = st.text_input("Introduza sua API Key (https://console.anthropic.com/)", value=default_anthropic_api_key, type="password")
     
     # --- Main Content ---
     # Checking if the user has introduced the OpenAI API Key, if not, a warning is displayed
     if (openai_api_key == "" or openai_api_key is None or "sk-" not in openai_api_key) and (google_api_key == "" or google_api_key is None) and (anthropic_api_key == "" or anthropic_api_key is None):
         st.write("#")
-        st.warning("⬅️ Please introduce an API Key to continue...")
+        st.warning("⬅️ Introduza sua API Key para continuar...")
 
         with st.sidebar:
             st.write("#")
             st.write("#")
-            st.video("https://www.youtube.com/watch?v=7i9j8M_zidA")
-            st.write("📋[Medium Blog: OpenAI GPT-4o](https://medium.com/@enricdomingo/code-the-omnichat-app-integrating-gpt-4o-your-python-chatgpt-d399b90d178e)")
-            st.video("https://www.youtube.com/watch?v=1IQmWVFNQEs")
-            st.write("📋[Medium Blog: Google Gemini](https://medium.com/@enricdomingo/how-i-add-gemini-1-5-pro-api-to-my-app-chat-with-videos-images-and-audios-f42171606143)")
-            st.video("https://www.youtube.com/watch?v=kXIOazjgV-8")
-            st.write("📋[Medium Blog: Anthropic Claude 3.5](https://medium.com/p/7ec4623e2dac)")
+            st.video("https://youtu.be/eqkBvOrnkzE?si=hUweh_z1SVXx2AxZ")
+            st.write("📋[Teledoc](https://teledocmedical.com/")
+            st.write("📋[UCPEL](https://ucpel.edu.br/")
+            st.write("📋[Blog Telemedicina e IA](https://teledocmedical.com/blog/)")
 
     else:
         client = OpenAI(api_key=openai_api_key)
@@ -245,22 +243,22 @@ def main():
             st.divider()
             
             available_models = [] + (anthropic_models if anthropic_api_key else []) + (google_models if google_api_key else []) + (openai_models if openai_api_key else [])
-            model = st.selectbox("Select a model:", available_models, index=0)
+            model = st.selectbox("Selecione o modelo:", available_models, index=0)
             model_type = None
             if model.startswith("gpt"): model_type = "openai"
             elif model.startswith("gemini"): model_type = "google"
             elif model.startswith("claude"): model_type = "anthropic"
             
-            with st.popover("⚙️ Model parameters"):
-                model_temp = st.slider("Temperature", min_value=0.0, max_value=2.0, value=0.3, step=0.1)
+            with st.popover("⚙️ Parâmetros do Modelo"):
+                model_temp = st.slider("Temperatura", min_value=0.0, max_value=2.0, value=0.3, step=0.1)
 
-            audio_response = st.toggle("Audio response", value=False)
+            audio_response = st.toggle("Resposta por áudio", value=False)
             if audio_response:
                 cols = st.columns(2)
                 with cols[0]:
-                    tts_voice = st.selectbox("Select a voice:", ["alloy", "echo", "fable", "onyx", "nova", "shimmer"])
+                    tts_voice = st.selectbox("Selecione a Voz:", ["alloy", "echo", "fable", "onyx", "nova", "shimmer"])
                 with cols[1]:
-                    tts_model = st.selectbox("Select a model:", ["tts-1", "tts-1-hd"], index=1)
+                    tts_model = st.selectbox("Selecione o modelo:", ["tts-1", "tts-1-hd"], index=1)
 
             model_params = {
                 "model": model,
@@ -272,7 +270,7 @@ def main():
                     st.session_state.pop("messages", None)
 
             st.button(
-                "🗑️ Reset conversation", 
+                "🗑️ Limpar conversa", 
                 on_click=reset_conversation,
             )
 
@@ -281,7 +279,7 @@ def main():
             # Image Upload
             if model in ["gpt-4o", "gpt-4-turbo", "gemini-1.5-flash", "gemini-1.5-pro", "claude-3-5-sonnet-20240620"]:
                     
-                st.write(f"### **🖼️ Add an image{' or a video file' if model_type=='google' else ''}:**")
+                st.write(f"### **🖼️ Adicionar Arquivo{' or a video file' if model_type=='google' else ''}:**")
 
                 def add_image_to_messages():
                     if st.session_state.uploaded_img or ("camera_img" in st.session_state and st.session_state.camera_img):
@@ -316,9 +314,9 @@ def main():
                 cols_img = st.columns(2)
 
                 with cols_img[0]:
-                    with st.popover("📁 Upload"):
+                    with st.popover("📁 Enviar"):
                         st.file_uploader(
-                            f"Upload an image{' or a video' if model_type == 'google' else ''}:", 
+                            f"Enviar Arquivo{' or a video' if model_type == 'google' else ''}:", 
                             type=["png", "jpg", "jpeg"] + (["mp4"] if model_type == "google" else []), 
                             accept_multiple_files=False,
                             key="uploaded_img",
@@ -326,25 +324,25 @@ def main():
                         )
 
                 with cols_img[1]:                    
-                    with st.popover("📸 Camera"):
-                        activate_camera = st.checkbox("Activate camera")
+                    with st.popover("📸 Câmera"):
+                        activate_camera = st.checkbox("Ativar Câmera")
                         if activate_camera:
                             st.camera_input(
-                                "Take a picture", 
+                                "Tire uma foto", 
                                 key="camera_img",
                                 on_change=add_image_to_messages,
                             )
 
             # Audio Upload
             st.write("#")
-            st.write(f"### **🎤 Add an audio{' (Speech To Text)' if model_type == 'openai' else ''}:**")
+            st.write(f"### **🎤 Adicionar Áudio{' (Speech To Text)' if model_type == 'openai' else ''}:**")
 
             audio_prompt = None
             audio_file_added = False
             if "prev_speech_hash" not in st.session_state:
                 st.session_state.prev_speech_hash = None
 
-            speech_input = audio_recorder("Press to talk:", icon_size="3x", neutral_color="#6ca395", )
+            speech_input = audio_recorder("Pressione para falar:", icon_size="3x", neutral_color="#6ca395", )
             if speech_input and st.session_state.prev_speech_hash != hash(speech_input):
                 st.session_state.prev_speech_hash = hash(speech_input)
                 if model_type != "google":
@@ -374,17 +372,15 @@ def main():
                     audio_file_added = True
 
             st.divider()
-            st.video("https://www.youtube.com/watch?v=7i9j8M_zidA")
-            st.write("📋[Medium Blog: OpenAI GPT-4o](https://medium.com/@enricdomingo/code-the-omnichat-app-integrating-gpt-4o-your-python-chatgpt-d399b90d178e)")
-            st.video("https://www.youtube.com/watch?v=1IQmWVFNQEs")
-            st.write("📋[Medium Blog: Google Gemini](https://medium.com/@enricdomingo/how-i-add-gemini-1-5-pro-api-to-my-app-chat-with-videos-images-and-audios-f42171606143)")
-            st.video("https://www.youtube.com/watch?v=kXIOazjgV-8")
-            st.write("📋[Medium Blog: Anthropic Claude 3.5](https://medium.com/p/7ec4623e2dac)")
+            st.video("https://youtu.be/eqkBvOrnkzE?si=1S3dNdMKLai6C_eI")
+            st.write("📋[Teledoc](https://teledocmedical.com/")
+            st.write("📋[UCPEL](https://ucpel.edu.br/")
+            st.write("📋[Blog Telemedicina e IA](https://teledocmedical.com/blog/)")
 
 
 
         # Chat input
-        if prompt := st.chat_input("Hi! Ask me anything...") or audio_prompt or audio_file_added:
+        if prompt := st.chat_input("Oi! Pergunte alguma coisa..") or audio_prompt or audio_file_added:
             if not audio_file_added:
                 st.session_state.messages.append(
                     {

@@ -1,17 +1,17 @@
-# The OmniChat
+# LACia Vision LLM
 
-Streamlit app to interact with OpenAI GPT-4o, with text, images and audio (using Whisper and TTS).
+LACia Vision LLM app to interact with OpenAI GPT-4o, with text, images and audio (using Whisper and TTS).
 
-[Streamlit App](https://the-omnichat.streamlit.app)  
+[LACia Vision LLM](https://teledocmedical.com)  
 
-[YouTube Video - GPT-4o](https://www.youtube.com/watch?v=7i9j8M_zidA)  
-[Medium Blog - GPT-4o](https://medium.com/@enricdomingo/code-the-omnichat-app-integrating-gpt-4o-your-python-chatgpt-d399b90d178e)  
+[Teledoc](https://teledocmedical.com/)  
+[Blog Teledoc](https://teledocmedical.com/blog)  
 
-[YouTube Video - Gemini 1.5](https://www.youtube.com/watch?v=1IQmWVFNQEs)  
-[Medium Blog - Gemini 1.5](https://medium.com/@enricdomingo/how-i-add-gemini-1-5-pro-api-to-my-app-chat-with-videos-images-and-audios-f42171606143)  
+[UCPEL](https://ucpel.edu.br/)  
+[Siga-me](htts://instagram.com/drjonasspezia/)  
 
-[YouTube Video - Claude 3.5](https://www.youtube.com/watch?v=kXIOazjgV-8)  
-[Medium Blog - Claude 3.5](https://medium.com/p/7ec4623e2dac)  
+[Telemedicina e IA](https://youtu.be/eqkBvOrnkzE?si=e0QOYKo4tfNN9LK7)  
+[Telemedicina](https://youtu.be/og5AbD5tWAs?si=2WfV_AMZpo1uMVnS)  
 
 
 
