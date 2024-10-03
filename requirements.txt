@@ -39,6 +39,7 @@ huggingface-hub==0.23.4
 idna==3.7
 importlib-metadata==6.11.0
 IProgress==0.4
+IPy==1.1
 ipykernel==6.29.4
 ipython==8.24.0
 jedi==0.19.1
